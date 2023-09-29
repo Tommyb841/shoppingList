@@ -1,0 +1,10 @@
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* This ensures the body takes the full viewport height */
+  margin: 0; /* Removes default margin */
+}
+h1 {
+  margin-top: 20px; /* Adjust the value as needed */
+  text-align: center;
+}
