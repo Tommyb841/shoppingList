@@ -6,7 +6,7 @@ import HomeButton from './HomeButton';
 export default function ShoppingList() {
   const [itemList, setItemList] = useState<Item[]>([]);
   const [productName, setProductName] = useState<string>("");
-  const [itemQuantity, setQuantity] = useState<number>(0);
+  const [itemQuantity, setQuantity] = useState<number>(1);
   const handleSubmit = (e: ReactFormEvent) => {
     e.preventDefault();
     if (productName) {
@@ -18,6 +18,7 @@ export default function ShoppingList() {
   }
   return (
     <>
+      <HomeButton />
       <h1>Shopping List</h1>
       <br />
       <h2>Item name</h2>
@@ -29,6 +30,7 @@ export default function ShoppingList() {
         <br />
         <h3>Quantity</h3>
         <input type="number"
+          min='1'
           value={itemQuantity}
           onChange={(e) => setQuantity(e.target.value)}
         />
@@ -41,7 +43,6 @@ export default function ShoppingList() {
           ))}
         </ul>
       </form>
-      <HomeButton />
     </>
   )
 }
