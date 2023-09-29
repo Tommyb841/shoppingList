@@ -1,0 +1,22 @@
+/* Remove default list styles */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: lightgray; /* light grey background for the nav */
+}
+
+/* Remove default link styles and add spacing */
+nav a {
+  text-decoration: none; /* removes underlines */
+  color: black; /* text color */
+  padding: 15px 30px; /* spacing: vertical and horizontal */
+  display: inline-block; /* make the entire area clickable */
+  transition: background-color 0.3s; /* transition for hover effect */
+}
+
+/* Hover effect */
+nav a:hover {
+  background-color: #ddd; /* a shade darker than light gray for contrast on hover */
+}
