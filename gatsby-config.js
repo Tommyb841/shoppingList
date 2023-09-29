@@ -7,18 +7,40 @@
 /**
  * @type {import('gatsby').GatsbyConfig}
  */
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
+const strapiConfig = {
+  apiURL: process.env.STRAPI_API_URL,
+  accessToken: process.env.STRAPI_TOKEN,
+  collectionTypes: ["article", "company", "author"],
+  singleTypes: [],
+  remoteFileHeaders: {
+    /**
+     * Customized request headers
+     * For http request with a image or other files need authorization
+     * For expamle: Fetch a CDN file which has a security config when gatsby building needs
+     */
+    Referer: "https://your-site-domain/",
+    // Authorization: "Bearer eyJhabcdefg_replace_it_with_your_own_token",
+  },
+}
 module.exports = {
+  graphqlTypegen: true,
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: `Shopping List`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
     siteUrl: `https://gatsbystarterdefaultsource.gatsbyjs.io/`,
   },
   plugins: [
     `gatsby-plugin-image`,
+
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: `gatsby-source-strapi`,
       options: {
+        strapiConfig,
         name: `images`,
         path: `${__dirname}/src/images`,
       },
