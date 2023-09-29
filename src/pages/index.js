@@ -1,15 +1,13 @@
 import React from "react"
-import { Link } from "gatsby"
+import NavBar from "../components/NavBar"
+
 // import item from './modules/item'
 function IndexPage() {
   return (
     <>
-      <h1>This is the index page to diffent components</h1>
-      <Link to="/shoppinglist">Shopping List</Link>
-      <br />
-      <Link to="/typegen">Type Generator</Link>
-      <br />
-      <Link to="/about">About</Link>
+      <NavBar />
+      <h1>This is the index page to different components</h1>
+      <img src="../image/doge.jpeg" alt="" />
     </>
   )
 }
