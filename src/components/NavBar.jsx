@@ -7,7 +7,6 @@ export default function NavBar (){
                 <a href="/">Home </a> 
                 <a href="/about">About </a>
                 <a href="/shoppinglist">Shopping List </a>
-                <a href="/contact">Contact </a>
         </nav>
     );
 }
