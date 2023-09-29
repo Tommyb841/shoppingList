@@ -1,0 +1,4 @@
+.doge {
+  width: 100%; /* Take full width of its container */
+  max-width: 600px;
+}
