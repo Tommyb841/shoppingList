@@ -1,5 +1,4 @@
 import React from "react"
-import HomeButton from "../components/HomeButton"
 import NavBar from "../components/NavBar"
 import "../modules/aboutStyles.css"
 export default function about() {
