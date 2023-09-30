@@ -7,7 +7,7 @@ import { Link } from "gatsby"
 
 function IndexPage({ data }) {
   console.log(data)
-  const heroImage = data.strapiSiteConfigs.hero.childImageSharp.fluid
+  // const heroImage = data.strapiSiteConfigs.hero.childImageSharp.fluid
 
   return (
     <>
@@ -15,11 +15,11 @@ function IndexPage({ data }) {
       <div className="container">
         <div className="text-container">
           <h1>Go to the shopping list</h1>
-          <Link to="/shoppinglist" className="centered-button">
+          {/* <Link to="/shoppinglist" className="centered-button">
             Shopping List
-          </Link>
+          </Link> */}
         </div>
-        <Img fluid={heroImage} alt="Hero" />
+        {/* <Img fluid={heroImage} alt="Hero" /> */}
         {/* <Img className="doge" fluid={data.file.childImageSharp.fluid} alt="" /> */}
       </div>
     </>
@@ -27,16 +27,3 @@ function IndexPage({ data }) {
 }
 
 export default IndexPage
-export const query = graphql`
-  {
-    strapiSiteConfigs {
-      hero {
-        childImageSharp {
-          fluid(maxWidth: 800) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-    }
-  }
-`
