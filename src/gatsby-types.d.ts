@@ -783,27 +783,7 @@ type ImageSharp_fixedArgs = {
 
 
 type ImageSharp_fluidArgs = {
-  background?: InputMaybe<Scalars['String']>;
-  base64Width: InputMaybe<Scalars['Int']>;
-  cropFocus?: InputMaybe<ImageCropFocus>;
-  duotone: InputMaybe<DuotoneGradient>;
-  fit?: InputMaybe<ImageFit>;
-  grayscale?: InputMaybe<Scalars['Boolean']>;
-  jpegProgressive?: InputMaybe<Scalars['Boolean']>;
-  jpegQuality: InputMaybe<Scalars['Int']>;
-  maxHeight: InputMaybe<Scalars['Int']>;
   maxWidth: InputMaybe<Scalars['Int']>;
-  pngCompressionSpeed?: InputMaybe<Scalars['Int']>;
-  pngQuality: InputMaybe<Scalars['Int']>;
-  quality: InputMaybe<Scalars['Int']>;
-  rotate?: InputMaybe<Scalars['Int']>;
-  sizes?: InputMaybe<Scalars['String']>;
-  srcSetBreakpoints?: InputMaybe<ReadonlyArray<InputMaybe<Scalars['Int']>>>;
-  toFormat?: InputMaybe<ImageFormat>;
-  toFormatBase64?: InputMaybe<ImageFormat>;
-  traceSVG: InputMaybe<Potrace>;
-  trim?: InputMaybe<Scalars['Float']>;
-  webpQuality: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -977,15 +957,15 @@ type ImageSharpFixedSortInput = {
 };
 
 type ImageSharpFluid = {
-  readonly aspectRatio: Scalars['Float'];
+  readonly aspectRatio: Maybe<Scalars['Float']>;
   readonly base64: Maybe<Scalars['String']>;
   readonly originalImg: Maybe<Scalars['String']>;
   readonly originalName: Maybe<Scalars['String']>;
   readonly presentationHeight: Scalars['Int'];
   readonly presentationWidth: Scalars['Int'];
-  readonly sizes: Scalars['String'];
-  readonly src: Scalars['String'];
-  readonly srcSet: Scalars['String'];
+  readonly sizes: Maybe<Scalars['String']>;
+  readonly src: Maybe<Scalars['String']>;
+  readonly srcSet: Maybe<Scalars['String']>;
   readonly srcSetWebp: Maybe<Scalars['String']>;
   readonly srcWebp: Maybe<Scalars['String']>;
   readonly tracedSVG: Maybe<Scalars['String']>;
@@ -1299,6 +1279,7 @@ type Query = {
   readonly allSiteFunction: SiteFunctionConnection;
   readonly allSitePage: SitePageConnection;
   readonly allSitePlugin: SitePluginConnection;
+  readonly allStrapiSiteConfigs: StrapiSiteConfigsConnection;
   readonly directory: Maybe<Directory>;
   readonly file: Maybe<File>;
   readonly imageSharp: Maybe<ImageSharp>;
@@ -1307,6 +1288,7 @@ type Query = {
   readonly siteFunction: Maybe<SiteFunction>;
   readonly sitePage: Maybe<SitePage>;
   readonly sitePlugin: Maybe<SitePlugin>;
+  readonly strapiSiteConfigs: Maybe<StrapiSiteConfigs>;
 };
 
 
@@ -1371,6 +1353,14 @@ type Query_allSitePluginArgs = {
   limit: InputMaybe<Scalars['Int']>;
   skip: InputMaybe<Scalars['Int']>;
   sort: InputMaybe<ReadonlyArray<InputMaybe<SitePluginSortInput>>>;
+};
+
+
+type Query_allStrapiSiteConfigsArgs = {
+  filter: InputMaybe<StrapiSiteConfigsFilterInput>;
+  limit: InputMaybe<Scalars['Int']>;
+  skip: InputMaybe<Scalars['Int']>;
+  sort: InputMaybe<ReadonlyArray<InputMaybe<StrapiSiteConfigsSortInput>>>;
 };
 
 
@@ -1537,6 +1527,15 @@ type Query_sitePluginArgs = {
   resolve: InputMaybe<StringQueryOperatorInput>;
   ssrAPIs: InputMaybe<StringQueryOperatorInput>;
   version: InputMaybe<StringQueryOperatorInput>;
+};
+
+
+type Query_strapiSiteConfigsArgs = {
+  children: InputMaybe<NodeFilterListInput>;
+  hero: InputMaybe<FileFilterInput>;
+  id: InputMaybe<StringQueryOperatorInput>;
+  internal: InputMaybe<InternalFilterInput>;
+  parent: InputMaybe<NodeFilterInput>;
 };
 
 type Site = Node & {
@@ -2313,6 +2312,124 @@ type SortOrderEnum =
   | 'ASC'
   | 'DESC';
 
+type StrapiSiteConfigs = Node & {
+  readonly children: ReadonlyArray<Node>;
+  readonly hero: Maybe<File>;
+  readonly id: Scalars['ID'];
+  readonly internal: Internal;
+  readonly parent: Maybe<Node>;
+};
+
+type StrapiSiteConfigsConnection = {
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly edges: ReadonlyArray<StrapiSiteConfigsEdge>;
+  readonly group: ReadonlyArray<StrapiSiteConfigsGroupConnection>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly nodes: ReadonlyArray<StrapiSiteConfigs>;
+  readonly pageInfo: PageInfo;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly totalCount: Scalars['Int'];
+};
+
+
+type StrapiSiteConfigsConnection_distinctArgs = {
+  field: StrapiSiteConfigsFieldSelector;
+};
+
+
+type StrapiSiteConfigsConnection_groupArgs = {
+  field: StrapiSiteConfigsFieldSelector;
+  limit: InputMaybe<Scalars['Int']>;
+  skip: InputMaybe<Scalars['Int']>;
+};
+
+
+type StrapiSiteConfigsConnection_maxArgs = {
+  field: StrapiSiteConfigsFieldSelector;
+};
+
+
+type StrapiSiteConfigsConnection_minArgs = {
+  field: StrapiSiteConfigsFieldSelector;
+};
+
+
+type StrapiSiteConfigsConnection_sumArgs = {
+  field: StrapiSiteConfigsFieldSelector;
+};
+
+type StrapiSiteConfigsEdge = {
+  readonly next: Maybe<StrapiSiteConfigs>;
+  readonly node: StrapiSiteConfigs;
+  readonly previous: Maybe<StrapiSiteConfigs>;
+};
+
+type StrapiSiteConfigsFieldSelector = {
+  readonly children: InputMaybe<NodeFieldSelector>;
+  readonly hero: InputMaybe<FileFieldSelector>;
+  readonly id: InputMaybe<FieldSelectorEnum>;
+  readonly internal: InputMaybe<InternalFieldSelector>;
+  readonly parent: InputMaybe<NodeFieldSelector>;
+};
+
+type StrapiSiteConfigsFilterInput = {
+  readonly children: InputMaybe<NodeFilterListInput>;
+  readonly hero: InputMaybe<FileFilterInput>;
+  readonly id: InputMaybe<StringQueryOperatorInput>;
+  readonly internal: InputMaybe<InternalFilterInput>;
+  readonly parent: InputMaybe<NodeFilterInput>;
+};
+
+type StrapiSiteConfigsGroupConnection = {
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly edges: ReadonlyArray<StrapiSiteConfigsEdge>;
+  readonly field: Scalars['String'];
+  readonly fieldValue: Maybe<Scalars['String']>;
+  readonly group: ReadonlyArray<StrapiSiteConfigsGroupConnection>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly nodes: ReadonlyArray<StrapiSiteConfigs>;
+  readonly pageInfo: PageInfo;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly totalCount: Scalars['Int'];
+};
+
+
+type StrapiSiteConfigsGroupConnection_distinctArgs = {
+  field: StrapiSiteConfigsFieldSelector;
+};
+
+
+type StrapiSiteConfigsGroupConnection_groupArgs = {
+  field: StrapiSiteConfigsFieldSelector;
+  limit: InputMaybe<Scalars['Int']>;
+  skip: InputMaybe<Scalars['Int']>;
+};
+
+
+type StrapiSiteConfigsGroupConnection_maxArgs = {
+  field: StrapiSiteConfigsFieldSelector;
+};
+
+
+type StrapiSiteConfigsGroupConnection_minArgs = {
+  field: StrapiSiteConfigsFieldSelector;
+};
+
+
+type StrapiSiteConfigsGroupConnection_sumArgs = {
+  field: StrapiSiteConfigsFieldSelector;
+};
+
+type StrapiSiteConfigsSortInput = {
+  readonly children: InputMaybe<NodeSortInput>;
+  readonly hero: InputMaybe<FileSortInput>;
+  readonly id: InputMaybe<SortOrderEnum>;
+  readonly internal: InputMaybe<InternalSortInput>;
+  readonly parent: InputMaybe<NodeSortInput>;
+};
+
 type StringQueryOperatorInput = {
   readonly eq: InputMaybe<Scalars['String']>;
   readonly glob: InputMaybe<Scalars['String']>;
@@ -2347,17 +2464,17 @@ type GatsbyImageSharpFixed_withWebp_noBase64Fragment = { readonly width: number,
 
 type GatsbyImageSharpFixed_withWebp_tracedSVGFragment = { readonly tracedSVG: string | null, readonly width: number, readonly height: number, readonly src: string, readonly srcSet: string, readonly srcWebp: string | null, readonly srcSetWebp: string | null };
 
-type GatsbyImageSharpFluidFragment = { readonly base64: string | null, readonly aspectRatio: number, readonly src: string, readonly srcSet: string, readonly sizes: string };
+type GatsbyImageSharpFluidFragment = { readonly base64: string | null, readonly aspectRatio: number | null, readonly src: string | null, readonly srcSet: string | null, readonly sizes: string | null };
 
-type GatsbyImageSharpFluid_noBase64Fragment = { readonly aspectRatio: number, readonly src: string, readonly srcSet: string, readonly sizes: string };
+type GatsbyImageSharpFluid_noBase64Fragment = { readonly aspectRatio: number | null, readonly src: string | null, readonly srcSet: string | null, readonly sizes: string | null };
 
-type GatsbyImageSharpFluid_tracedSVGFragment = { readonly tracedSVG: string | null, readonly aspectRatio: number, readonly src: string, readonly srcSet: string, readonly sizes: string };
+type GatsbyImageSharpFluid_tracedSVGFragment = { readonly tracedSVG: string | null, readonly aspectRatio: number | null, readonly src: string | null, readonly srcSet: string | null, readonly sizes: string | null };
 
-type GatsbyImageSharpFluid_withWebpFragment = { readonly base64: string | null, readonly aspectRatio: number, readonly src: string, readonly srcSet: string, readonly srcWebp: string | null, readonly srcSetWebp: string | null, readonly sizes: string };
+type GatsbyImageSharpFluid_withWebpFragment = { readonly base64: string | null, readonly aspectRatio: number | null, readonly src: string | null, readonly srcSet: string | null, readonly srcWebp: string | null, readonly srcSetWebp: string | null, readonly sizes: string | null };
 
-type GatsbyImageSharpFluid_withWebp_noBase64Fragment = { readonly aspectRatio: number, readonly src: string, readonly srcSet: string, readonly srcWebp: string | null, readonly srcSetWebp: string | null, readonly sizes: string };
+type GatsbyImageSharpFluid_withWebp_noBase64Fragment = { readonly aspectRatio: number | null, readonly src: string | null, readonly srcSet: string | null, readonly srcWebp: string | null, readonly srcSetWebp: string | null, readonly sizes: string | null };
 
-type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = { readonly tracedSVG: string | null, readonly aspectRatio: number, readonly src: string, readonly srcSet: string, readonly srcWebp: string | null, readonly srcSetWebp: string | null, readonly sizes: string };
+type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = { readonly tracedSVG: string | null, readonly aspectRatio: number | null, readonly src: string | null, readonly srcSet: string | null, readonly srcWebp: string | null, readonly srcSetWebp: string | null, readonly sizes: string | null };
 
 type GatsbyImageSharpFluidLimitPresentationSizeFragment = { readonly maxHeight: number, readonly maxWidth: number };
 

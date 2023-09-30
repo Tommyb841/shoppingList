@@ -42,13 +42,11 @@ module.exports = {
     {
       resolve: "gatsby-source-strapi",
       options: {
-        options: {
-          apiURL: `http://localhost:1337`,
-          queryLimit: 1000,
-          contentTypes: [`Products`], // replace with your content type names
-          // If using single types place them in this array.
-          singleTypes: [`home-page`, `about`],
-        },
+        apiURL: `http://localhost:1337`,
+        queryLimit: 1000,
+        contentTypes: [`Products`, `site-configs`], // replace with your content type names
+        // If using single types place them in this array.
+        singleTypes: [`home-page`, `about`],
       },
     },
     {
