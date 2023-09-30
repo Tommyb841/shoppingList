@@ -6,6 +6,9 @@ import "../modules/indexStyles.css"
 import { Link } from "gatsby"
 
 function IndexPage({ data }) {
+  console.log(data)
+  const heroImage = data.strapiSiteConfigs.hero.childImageSharp.fluid
+
   return (
     <>
       <NavBar />
@@ -16,7 +19,8 @@ function IndexPage({ data }) {
             Shopping List
           </Link>
         </div>
-        <Img className="doge" fluid={data.file.childImageSharp.fluid} alt="" />
+        <Img fluid={heroImage} alt="Hero" />
+        {/* <Img className="doge" fluid={data.file.childImageSharp.fluid} alt="" /> */}
       </div>
     </>
   )
@@ -24,11 +28,13 @@ function IndexPage({ data }) {
 
 export default IndexPage
 export const query = graphql`
-  query {
-    file(relativePath: { eq: "doge.jpeg" }) {
-      childImageSharp {
-        fluid(maxWidth: 200) {
-          ...GatsbyImageSharpFluid
+  {
+    strapiSiteConfigs {
+      hero {
+        childImageSharp {
+          fluid(maxWidth: 800) {
+            ...GatsbyImageSharpFluid
+          }
         }
       }
     }
