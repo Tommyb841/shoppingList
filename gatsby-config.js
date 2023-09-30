@@ -40,15 +40,17 @@ module.exports = {
     "gatsby-transformer-sharp",
 
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: "gatsby-source-strapi",
       options: {
-        strapiConfig,
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        options: {
+          apiURL: `http://localhost:1337`,
+          queryLimit: 1000,
+          contentTypes: [`Products`], // replace with your content type names
+          // If using single types place them in this array.
+          singleTypes: [`home-page`, `about`],
+        },
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
