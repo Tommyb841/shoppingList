@@ -1,19 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import '../modules/ShoppinglistStyle.css'
 import Item from '../modules/items';
+import axios from 'axios'
 
 export default function ShoppingList() {
 
   const [itemList, setItemList] = useState<Item[]>([]);
-  const [productName, setProductName] = useState<string>("");
+  const [itemName, setItemName] = useState<string>("");
   const [itemQuantity, setQuantity] = useState<number>(1);
-  const handleSubmit = (e: ReactFormEvent) => {
+
+  useEffect(() => {
+    axios.get<Item[]>('http://localhost:1337/products')
+      .then(response => setItemList(response.data))
+      .catch(error => console.error("There was an error fetching the products", error));
+  }, []);
+
+  const handleSubmit = async (e: ReactFormEvent) => {
     e.preventDefault();
-    if (productName) {
-      const newItem: Item = { product: productName, quantity: itemQuantity };
-      setItemList(prevItems => [...prevItems, newItem]);
-      setProductName("");
-      setQuantity(1);
+    if (itemName) {
+      const newItem: Item = {
+        productName: itemName, quantity: itemQuantity
+      };
+      try {
+        const response = await axios.post<Item>('http://localhost:1337/products', newItem)
+        setItemList(prevItems => [...prevItems, response.data]);
+        setItemName("");
+        setQuantity(1);
+
+      } catch (error) {
+        console.error("There was an error adding the product", error);
+      }
     }
   }
   const totalQuantity = itemList.reduce((accumulatedQuantity, currentItem) => {
@@ -27,8 +43,8 @@ export default function ShoppingList() {
         <h2>Item name</h2>
         <form onSubmit={handleSubmit}>
           <input type="text"
-            value={productName} placeholder="Enter Item"
-            onChange={(e) => setProductName(e.target.value)}
+            value={itemName} placeholder="Enter Item"
+            onChange={(e) => setItemName(e.target.value)}
           />
           <br />
           <h3>Quantity</h3>
@@ -47,8 +63,8 @@ export default function ShoppingList() {
             {itemList.length > 1 || itemList.length === 0 ? ' items ' : ' item '}
             on your list.
           </h2>
-          {itemList.map((item, index) => (
-            <li key={index}>{item.quantity} {item.product}</li>
+          {itemList.map((item) => (
+            <li key={item.id}>{item.quantity} {item.productName}</li>
           ))}
         </ul>
 
