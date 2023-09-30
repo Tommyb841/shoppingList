@@ -16,3 +16,30 @@ exports.createPages = async ({ actions }) => {
     defer: true,
   })
 }
+exports.sourceNodes = ({ actions }) => {
+  const { createTypes } = actions
+
+  const typeDefs = `
+    type StrapiSiteConfigs implements Node {
+      hero: File @link(by: "relativePath")
+    }
+
+    type File implements Node {
+      childImageSharp: ImageSharp
+    }
+
+    type ImageSharp {
+      fluid(maxWidth: Int): ImageSharpFluid
+    }
+
+    type ImageSharpFluid {
+      aspectRatio: Float
+      base64: String
+      sizes: String
+      src: String
+      srcSet: String
+    }
+  `
+
+  createTypes(typeDefs)
+}
