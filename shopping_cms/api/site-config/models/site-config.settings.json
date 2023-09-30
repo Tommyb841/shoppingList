@@ -12,7 +12,7 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "doge_dog": {
+    "hero": {
       "model": "file",
       "via": "related",
       "allowedTypes": [
