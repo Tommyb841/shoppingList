@@ -3,12 +3,19 @@ import NavBar from "../components/NavBar"
 import { graphql } from "gatsby"
 import Img from "gatsby-image"
 import "../modules/indexStyles.css"
+import { Link } from "gatsby"
+
 function IndexPage({ data }) {
   return (
     <>
       <NavBar />
       <div className="container">
-        <h1>This is the index page to different components</h1>
+        <div className="text-container">
+          <h1>Go to the shopping list</h1>
+          <Link to="/shoppinglist" className="centered-button">
+            Shopping List
+          </Link>
+        </div>
         <Img className="doge" fluid={data.file.childImageSharp.fluid} alt="" />
       </div>
     </>
